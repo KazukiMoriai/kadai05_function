@@ -479,22 +479,16 @@ const wordObject = [
 // 検索ボタンのクリックイベント local strage へひらがなとローマ字をセット
 document.getElementById("search").addEventListener('click', function() {
     const key = document.getElementById("key").value; 
+	const romaji = hiragana2romaji(key);
     const vowels = hiragana2romaji(key).replace(/[^aeiou]/gi,'');; // aiueo以外の文字を大文字小文字問わず空白にする
-    console.log(vowels);
-    const value = [hiragana2romaji(key), vowels];
-    localStorage.setItem(key, JSON.stringify(value)); // 配列をJSON文字列に変換して保存
+    
+	console.log(key);
+	console.log(romaji);
+	console.log(vowels);
 
-    // ローカルストレージからインデックス1の値を取得
-    const index1Value = localStorage.getItem(localStorage.key(1));
+	document.getElementById("detail").textContent= `母音は${vowels}`;
+	
 
-    // wordObjectから一致するwordを探す
-    const matchingWords = wordObject
-        .filter(item => item.vowels === index1Value)
-        .map(item => item.word);
-
-    // 結果を返す
-    console.log(matchingWords); // 一致するwordの配列を表示
-  
 });
 
 
